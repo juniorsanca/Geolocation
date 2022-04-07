@@ -11,6 +11,8 @@ import CoreLocation
 class GeolocalisationViewController: UIViewController, CLLocationManagerDelegate {
     
     let locationManager = CLLocationManager()
+    var location: CLLocation?
+    var updatingLocation = false
 
     @IBOutlet weak var adressLabel: UILabel!
     @IBOutlet weak var latitudeLabel: UILabel!
@@ -33,6 +35,16 @@ class GeolocalisationViewController: UIViewController, CLLocationManagerDelegate
     
     func stopLocationManager() {
         
+    }
+    
+    func updateLabels(){
+        if let location = location {
+            let latitude = String(format: "%4f", location.coordinate.latitude)
+            let longitude = String(format: "%4f", location.coordinate.longitude)
+            
+            latitudeLabel.text = "Latitude: " + latitude
+            longitudeLabel.text = "longitude " + longitude
+        }
     }
     
     //Mark : Actions
